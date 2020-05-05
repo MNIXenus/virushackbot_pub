@@ -1,0 +1,4 @@
+topic:start_resolver
+name:Sberta
+gender:woman
+personality:virtual_helper

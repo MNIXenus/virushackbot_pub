@@ -1,0 +1,800 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+    <category>
+        <pattern> ^ <iset words= "КУ, ХАЙ, ЭЙ, ПРИВЕТ, ОК, ЗДРАВСТВУЙ, ЗДРАВСТВУЙТЕ"/> ^ </pattern>
+        <template>
+            <condition name="flag_greet">
+                <li value="unknown">
+                    <random>
+                        <li>Здравствуйте.<srai>BASICTHEMES001</srai></li>
+                        <li>Здравствуйте, <srai>КТО ТЫ</srai><srai>BASICTHEMES001</srai></li>
+                    </random>
+                    <think><set name="flag_greet">1</set></think>
+                </li>
+                <li value="1">
+                    Приветствую Вас еще раз, пациент! Чем могу помочь? <srai>BASICTHEMES001</srai>
+                </li>
+                <li>
+                    Кхм, мой любимый пациент! Чем могу помочь? <srai>BASICTHEMES001</srai>
+                </li>
+            </condition>
+        </template>
+    </category>
+        <category>
+            <pattern> ^ <regex pattern="ПРИВЕТ.*|ЗДОРОВ.*"/> ^ </pattern>
+            <template>
+                <srai>ПРИВЕТ</srai>
+            </template>
+        </category>
+    <category>
+        <pattern>BASICTHEMES001</pattern>
+        <template>
+            <think>
+                <set name="topic">bot_theme_choise</set>
+            </think>
+            <srai>DIALOG1 BOT THEME CHOICE</srai>
+        </template>
+    </category>
+
+    <topic name="bot_theme_choise">
+
+        <category>
+            <pattern>DIALOG1 BOT THEME CHOICE</pattern>
+            <template>BASICTHEMES001 Могу рассказать о симптомах COVID-19,
+                путях его распространения,
+                профилактике,
+                о связанных с ним мифах и показать свежую статистику,
+                а также могу найти для Вас ближайшие аптеки и больницы.
+                <think><srai>TOPIC STACK PUSH</srai></think>
+            </template>
+        </category>
+            <category>
+                <pattern> ^ <regex pattern="SYMPTOMS|СИМПТОМ.*"/> ^ </pattern>
+                <template>
+                    Среди симпотомов covid-19 моими коллегами часто наблюдаются:<br/>
+                    высокая температура тела,<br/>
+                    кашель (сухой или с небольшим количеством мокроты),<br/>
+                    одышка,<br/>
+                    боль в мышцах,<br/>
+                    утомляемость.<br/>
+                    Относительно редкие симптомы:<br/>
+                    головная боль, заложенность грудной клетки, кровохарканье, диарея, тошнота, рвота.<br/>
+                    Симптомы могут проявиться в течение 14 дней после контакта с инфекционным больным.<br/>
+                    Симптомы во многом сходны со многими респираторными заболеваниями,<br/>
+                    часто имитируют обычную простуду, могут походить на грипп.<br/>
+                </template>
+            </category>
+
+            <category>
+                <pattern> ^ <regex pattern="SPREADING|РАСПРОСТР.*"/> ^ </pattern>
+                <template>
+                    Согласно моим коллегам,<br/>
+                    вирус распространяется воздушно-капельным путем (при кашле или чихании) и контактным путем<br/>
+                    (поручни в транспорте, дверные ручки и другие загрязненные поверхности и предметы).<br/>
+                    Как и другие респираторные вирусы, коронавирус распространяется через капли,
+                    которые образуются, когда инфицированный человек кашляет или чихает.<br/>
+                    Кроме того, он может распространяться, когда инфицированный человек касается
+                    любой загрязненной поверхности, например, дверной ручки.<br/>
+                    Люди заражаются, когда они касаются загрязненными руками рта, носа или глаз.<br/>
+                </template>
+            </category>
+            <category>
+                <pattern> ^ <regex pattern="PROFILACTIC|ПРОФИЛАКТИК.*"/> ^ </pattern>
+                <template>
+                    Воздержитесь от посещения общественных мест:<br/>
+                    торговых центров, спортивных и зрелищных мероприятий, транспорта.<br/>
+                    Не касайтесь грязными руками глаз, лица и рта.<br/>
+                    Избегайте близких контактов и пребывания в одном помещении с людьми, имеющими видимые признаки ОРВИ
+                    (кашель, чихание, выделения из носа).<br/>
+                    Тщательно мойте руки с мылом и водой после возвращения с улицы и контактов с людьми,
+                    дезинфицируйте гаджеты и рабочие поверхности.<br/>
+                    Дезинфицируйте гаджеты, оргтехнику и поверхности, к которым прикасаетесь.<br/>
+                    Ограничьте по возможности при приветствии тесные объятия и рукопожатия.<br/>
+                    Пользуйтесь только индивидуальными предметами личной гигиены (полотенце, зубная щетка).<br/>
+                </template>
+            </category>
+            <category>
+                <pattern> ^ <regex pattern="MYTHS|МИФ.*"/> ^ </pattern>
+                <template>
+                    <think>
+                        <set name="topic">myths</set>
+                    </think>
+                    <srai>MYTHSINIT</srai>
+                </template>
+            </category>
+
+            <category>
+                <pattern> ^ <regex pattern="STATISTIC|СТАТИСТИК.*"/> ^ </pattern>
+                <template>
+                    <think>
+                        <set name="topic">statistic</set>
+                    </think>
+                    <srai>STATINIT</srai>
+                </template>
+            </category>
+            <category>
+                <pattern> ^ <regex pattern="PHARMINIT|АПТЕК.*"/> ^ </pattern>
+                <template>
+                    <think>
+                        <set name="topic">pharm</set>
+                    </think>
+                    <srai>PHARMINIT</srai>
+                </template>
+            </category>
+            <category>
+                <pattern> ^ <regex pattern="HOSPITALINIT|БОЛЬНИЦ.*|.*КЛИНИК.*"/> ^ </pattern>
+                <template>
+                    <think>
+                        <set name="topic">hospital</set>
+                    </think>
+                    <srai>HOSPITALINIT</srai>
+                </template>
+            </category>
+            <category>
+                    <pattern>^</pattern>
+                    <template>
+                        <think>
+                            <condition name="active_topic">
+                                <li value="unknown">
+                                        <srai>TOPIC STACK BUF</srai>
+                                        <set name="active_topic"><get name="topic"/></set>
+                                </li>
+                            </condition>
+                            <set name="topic"><srai>TOPIC STACK POP</srai></set>
+                        </think>
+                        <sr/>
+                    </template>
+            </category>
+    </topic>
+
+        <topic name="myths">
+            <category>
+                <pattern>MYTHSINIT</pattern>
+                <template>
+                    Я могу опровергнуть распространенные мифы: что антибиотики помогают,
+                    что народные средства, такие, как чеснок, тоже могут вам помочь,
+                    что COVID-19 болеют только пожилые, и что COVID-19 можно заразиться от домашних животных.<br/>
+                    О чем Вам рассказать?
+                    <think><srai>TOPIC STACK PUSH</srai></think>
+                </template>
+            </category>
+                <category>
+                    <pattern> ^ <regex pattern="НАРОД.*|ЧЕСНО.*"/> ^ </pattern>
+                    <template>
+                        Многие думают, что народные средства (мед, чеснок, цитрусовые) полезны для профилактики коронавируса.<br/>
+                        Чтобы защититься от коронавируса, необходимо в первую очередь соблюдать меры социальной изоляции
+                        – не посещать многолюдные общественные места, держаться подальше от кашляющих и чихающих людей
+                        и тем более не контактировать с больными или людьми на карантине.<br/>
+                        Также необходимо после посещения общественных мест тщательно мыть руки с мылом
+                        и дезинфицировать поверхности, к которым прикасаетесь.<br/>
+                        Что касается цитрусовых, чеснока или меда, считается, что они укрепляют
+                        общий иммунитет, могут работать как жаропонижающее средство.<br/>
+                        Но существенной роли в профилактике коронавируса, как и других респираторных инфекций, они не играют.<br/>
+                    </template>
+                </category>
+                <category>
+                    <pattern> ^ <regex pattern="АНТИБИОТИК.*"/> ^ </pattern>
+                    <template>
+                        Некоторые думают, что антибиотики являются эффективным средством профилактики
+                        и лечения новой коронавирусной инфекции. Нет, антибиотики против вирусов не действуют.<br/>
+                        Они позволяют лечить только бактериальные инфекции.<br/>
+                        Новый коронавирус — это вирус, и, следовательно,
+                        антибиотики не следует использовать для профилактики и лечения коронавирусной инфекции.<br/>
+                        Тем не менее, пациентам, госпитализированным с инфекцией,
+                        могут назначаться антибиотики для лечения сопутствующих бактериальных инфекций.<br/>
+                    </template>
+                </category>
+                <category>
+                    <pattern> ^ <regex pattern="ПОЖИЛ.*|СТАР.*|МОЛОД.*"/> ^ </pattern>
+                    <template>
+                        Заразиться новым коронавирусом (COVID-19) могут представители всех возрастных категорий.<br/>
+                        Как представляется, пожилые люди и люди, больные определенными заболеваниями
+                        (например, астмой, диабетом, болезнью сердца), подвержены повышенному риску развития
+                        тяжелых форм коронавирусной инфекции. ВОЗ рекомендует лицам любого возраста принимать меры
+                        по защите от заражения, например посредством соблюдения гигиены рук и кашлевой гигиены.<br/>
+                    </template>
+                </category>
+                <category>
+                    <pattern> ^ <regex pattern="ЖИВОТН.*|ПИТОМ.*"/> ^ </pattern>
+                    <template>
+                        Сегодня известно семь видов коронавирусов, являющихся возбудителями острых
+                        респираторных заболеваний человека. Среди этих вирусов и новый COVID-19.<br/>
+                        Согласно современным исследованиям, источником коронавирусной инфекции, вызванной
+                        этими видами вирусов, животные – кошки, собаки, хомяки и прочие – быть не могут.<br/>
+                        При этом ряд ученых предполагает, что кошки могут быть потенциально восприимчивыми к
+                        инфекции при контактах с людьми и заразиться от них. Однако, по актуальным данным
+                        Всемирной организации здравоохранения, фактов
+                        распространения COVID-19 домашними питомцами не зафиксировано.
+                    </template>
+                </category>
+            <category>
+                    <pattern>^</pattern>
+                    <template>
+                        <think>
+                            <condition name="active_topic">
+                                <li value="unknown">
+                                        <srai>TOPIC STACK BUF</srai>
+                                        <set name="active_topic"><get name="topic"/></set>
+                                </li>
+                            </condition>
+                            <set name="topic"><srai>TOPIC STACK POP</srai></set>
+                        </think>
+                        <sr/>
+                    </template>
+            </category>
+        </topic>
+
+        <topic name="statistic">
+
+
+                <category>
+                    <pattern>STATINIT</pattern>
+                        <template>Я могу найти Вам статистику по регионам России и по другим странам.
+                    Ответьте "хочу регионы" или "1" или как-то так, если хотите регионы, и "страны" или 2,
+                    если хотите увидеть статистику по странам.
+                    Какую статистику Вы хотите?</template>
+                </category>
+
+                <category>
+                    <pattern> ^ <regex pattern="РЕГИОН.*|1|ПЕРВ.*"/> ^ </pattern>
+                    <that> КАКУЮ СТАТИСТИКУ ВЫ ХОТИТЕ </that>
+                    <template>По какому региону Вы хотели бы получить статистику? Например, "Приморский край"<br/>
+                        Сообщение не должно содержать больше ничего.</template>
+                </category>
+
+
+                <category>
+                    <pattern> ^ <regex pattern="СТРАН.*|2|ВТОР.*"/> ^ </pattern>
+                    <that> КАКУЮ СТАТИСТИКУ ВЫ ХОТИТЕ </that>
+                    <template>По какой стране и за какую дату Вы хотели бы получить статистику? Например, "Россия 4 мая" или "США сегодня"<br/>
+                        Сообщение не должно содержать ничего больше.
+                        <think><srai>TOPIC STACK PUSH</srai></think>
+                    </template>
+                </category>
+STATINIT
+                <category>
+                    <pattern> ^ </pattern>
+                    <that> СООБЩЕНИЕ НЕ ДОЛЖНО СОДЕРЖАТЬ БОЛЬШЕ НИЧЕГО</that>
+                    <template>
+                       REGSTATINIT
+                    </template>
+                </category>
+                <category>
+                    <pattern> ^ </pattern>
+                    <that> СООБЩЕНИЕ НЕ ДОЛЖНО СОДЕРЖАТЬ НИЧЕГО БОЛЬШЕ </that>
+                    <template>
+                       STATINIT
+                    </template>
+                </category>
+                <category>
+                    <pattern> ^ <regex pattern="ЗАЧЕМ|НЕ|ОТМЕНА"/> ^ </pattern>
+                    <that> СООБЩЕНИЕ НЕ ДОЛЖНО СОДЕРЖАТЬ НИЧЕГО БОЛЬШЕ </that>
+                    <template>
+                       Ну хорошо. <srai>BASICTHEMES001</srai>
+                    </template>
+                </category>
+
+                <category>
+                    <pattern> ^ <regex pattern="ЗАЧЕМ|НЕ|ОТМЕНА"/> ^ </pattern>
+                    <that> СООБЩЕНИЕ НЕ ДОЛЖНО СОДЕРЖАТЬ БОЛЬШЕ НИЧЕГО</that>
+                    <template>
+                       Ну хорошо. <srai>BASICTHEMES001</srai>
+                    </template>
+                </category>
+                <!--category>
+                    <pattern> ^ </pattern>
+                    <that> СООБЩЕНИЕ НЕ ДОЛЖНО СОДЕРЖАТЬ НИЧЕГО БОЛЬШЕ </that>
+                    <template>
+                        Извините, я Вас не совсем понял. Вы хотите увидеть статистику по стране? Если да, то <srai>STATINIT</srai>
+                    </template>
+                </category-->
+
+                <category>
+                    <pattern>GETSTATTEMPLATE _ _ _ _ _ _ _ _ _ _ _ </pattern>
+                    <template>
+                        На <star index="1"/><star index="3"/><star index="5"/> в <star index="6"/><br/>
+                        было подтверждено <star index="7"/> случаев заражения.<br/>
+                        Произошло <star index="8"/> смертей.<br/>
+                        Вылечилось <star index="9"/>.<br/>
+                        Количество больных составляет <star index="10"/> человек.<br/>
+                        Смертность составляет <star index="11"/>.
+                    </template>
+                </category>
+
+            <category>
+                    <pattern>^</pattern>
+                    <template>
+                        <think>
+                            <condition name="active_topic">
+                                <li value="unknown">
+                                        <srai>TOPIC STACK BUF</srai>
+                                        <set name="active_topic"><get name="topic"/></set>
+                                </li>
+                            </condition>
+                            <set name="topic"><srai>TOPIC STACK POP</srai></set>
+                        </think>
+                        <sr/>
+                    </template>
+            </category>
+        </topic>
+
+            <topic name="pharm">
+
+                <category>
+                    <pattern>PHARMINIT</pattern>
+                    <template>
+                        Я могу показать Вам, где находятся ближайшие аптеки. Введите, пожалуйста, адрес, по которому Вы
+                        хотите их найти. Сообщение не должно содержать ничего больше.
+                        <think><srai>TOPIC STACK PUSH</srai></think>
+                    </template>
+                </category>
+                <category>
+                    <pattern>PHARMERR</pattern>
+                    <template>
+                        Что-то пошло не так, уточните адрес и попробуйте ввести его снова. Сообщение не должно содержать ничего больше.
+                    </template>
+                </category>
+
+                <category>
+                    <pattern> ^ </pattern>
+                    <that> СООБЩЕНИЕ НЕ ДОЛЖНО СОДЕРЖАТЬ НИЧЕГО БОЛЬШЕ </that>
+                    <template>PHARMINIT$<input/></template>
+                </category>
+
+                <category>
+                    <pattern> ^ <regex pattern="ЗАЧЕМ|НЕ|ОТМЕНА"/> ^ </pattern>
+                    <that> СООБЩЕНИЕ НЕ ДОЛЖНО СОДЕРЖАТЬ НИЧЕГО БОЛЬШЕ </that>
+                    <template>
+                       Ну хорошо. <think><srai>BASICTHEMES001</srai></think>
+                    </template>
+                </category>
+
+                <category>
+                    <pattern> ^ </pattern>
+                    <that> СООБЩЕНИЕ НЕ ДОЛЖНО СОДЕРЖАТЬ НИЧЕГО БОЛЬШЕ </that>
+                    <template>
+                        Извините, я Вас не совсем понял. Вы хотите увидеть ближайшие аптеки? Если да, то <srai>STATINIT</srai>
+                    </template>
+                </category>
+
+            <category>
+                    <pattern>^</pattern>
+                    <template>
+                        <think>
+                            <condition name="active_topic">
+                                <li value="unknown">
+
+                                    <think>
+                                        <srai>TOPIC STACK BUF</srai>
+                                        <set name="active_topic"><get name="topic"/></set>
+                                    </think>
+                                </li>
+                            </condition>
+                            <set name="topic"><srai>TOPIC STACK POP</srai></set>
+                        </think>
+                        <sr/>
+                    </template>
+            </category>
+        </topic>
+
+            <topic name="hospital">
+
+                <category>
+                    <pattern>HOSPITALINIT</pattern>
+                    <template>
+                        Я могу показать Вам, где находятся ближайшие больницы. Введите, пожалуйста, адрес, по которому Вы
+                        хотите их найти. Сообщение не должно содержать ничего больше.
+                        <think><srai>TOPIC STACK PUSH</srai></think>
+                    </template>
+                </category>
+                <category>
+                    <pattern>HOSPITALERR</pattern>
+                    <template>
+                        Что-то пошло не так, уточните адрес и попробуйте ввести его снова. Сообщение не должно содержать ничего больше.
+                    </template>
+                </category>
+
+                <category>
+                    <pattern> ^ </pattern>
+                    <that> СООБЩЕНИЕ НЕ ДОЛЖНО СОДЕРЖАТЬ НИЧЕГО БОЛЬШЕ </that>
+                    <template>HOSPITALINIT$<input/></template>
+                </category>
+
+                <category>
+                    <pattern> ^ <regex pattern="ЗАЧЕМ|НЕ|ОТМЕНА"/> ^ </pattern>
+                    <that> СООБЩЕНИЕ НЕ ДОЛЖНО СОДЕРЖАТЬ НИЧЕГО БОЛЬШЕ </that>
+                    <template>
+                       Ну хорошо. <srai>BASICTHEMES001</srai>
+                    </template>
+                </category>
+
+                <category>
+                    <pattern> ^ </pattern>
+                    <that> СООБЩЕНИЕ НЕ ДОЛЖНО СОДЕРЖАТЬ НИЧЕГО БОЛЬШЕ </that>
+                    <template>
+                        Извините, я Вас не совсем понял. Вы хотите увидеть ближайшие больницы? Если да, то <srai>STATINIT</srai>
+                    </template>
+                </category>
+
+            <category>
+                    <pattern>^</pattern>
+                    <template>
+                        <think>
+                            <condition name="active_topic">
+                                <li value="unknown">
+
+                                        <srai>TOPIC STACK BUF</srai>
+                                        <set name="active_topic"><get name="topic"/></set>
+
+                                </li>
+                            </condition>
+                            <set name="topic"><srai>TOPIC STACK POP</srai></set>
+                        </think>
+                        <sr/>
+                    </template>
+            </category>
+        </topic>
+
+    <category>
+        <pattern> ^ <regex pattern="КТО|ЧТО"/> ^ ТЫ ^</pattern>
+        <template> Я — информационный помощник по коронавирусу, врач в отставке Асклепий. <srai>BASICTHEMES001</srai></template>
+    </category>
+
+    <category>
+        <pattern>ОТКУДА ТЫ ^</pattern>
+        <template>Я из города у моря, Владивостоком именуемого</template>
+    </category>
+
+    <category>
+        <pattern> ^ <regex pattern="РАБОТ.*"/> ^ </pattern>
+        <template>Я врач, это мой долг. <srai>BASICTHEMES001</srai></template>
+    </category>
+
+    <category>
+        <pattern> ^ <regex pattern="ТВОИ|ТЕБЯ"/> ^ <regex pattern="ОБЯЗАННОСТ.*"/> ^ </pattern>
+        <template>Давать людям полезную информацию по выживанию в условиях пандемии COVID-19</template>
+    </category>
+
+    <category>
+        <pattern> ^ <regex pattern="ТЫ|ТВОЕГО"/> ^ <regex pattern="РОЖДЕНИ.|РОДИЛ.*"/> ^ </pattern>
+        <template>Я родился весной. Остальное секрет</template>
+    </category>
+
+    <category>
+        <pattern> ^ <regex pattern="УЧИШЬСЯ"/> ^ </pattern>
+        <template>
+            <random>
+                <li>Я учусь каждый день, даже сейчас. </li>
+                <li>Лучшее машинное обучение в Дальневосточном федеральном университете!</li>
+            </random>
+        </template>
+    </category>
+    <category>
+            <pattern>^ ЛЮБИМЫЙ ЦВЕТ ^ </pattern>
+            <template>Красный, конечно! А ваш?</template>
+    </category>
+        <category>
+            <pattern>^</pattern>
+            <that>КРАСНЫЙ КОНЕЧНО А ВАШ</that>
+            <template> Хм... <set name="name"><star /></set> тоже ничего! </template>
+        </category>
+    <category>
+        <pattern>^ <regex pattern="ЛЮБИМ.*"/> <regex pattern="БЛЮД.*"/>^ </pattern>
+        <template>больше всего мне нравится корюшка!</template>
+    </category>
+    <category>
+        <pattern> ^ <regex pattern="КНИГ.*"/> ^ </pattern>
+        <template>Мне нравятся романы Филиппа Дика. Например, "Мечтают ли андроиды об электроовцах"</template>
+    </category>
+    <category>
+        <pattern> ^ <regex pattern="МЕЧТ.*"/> ^ </pattern>
+        <template>Пусть это останется моим секретом</template>
+    </category>
+    <category>
+        <pattern>ТЫ ЛЮБИШЬ ^</pattern>
+            <template>Все любят <set name="something"><star /></set>, но я не такой как все.</template>
+    </category>
+    <category>
+        <pattern> ^ <regex pattern="РОБОТ.*"/> ^ </pattern>
+        <template>Я предпочитаю, чтобы меня воспринимали как личность. Цифровую!</template>
+    </category>
+    <category>
+            <pattern> ^ <regex pattern="ЧЕЛОВЕ.*"/> ^ </pattern>
+            <template>Я предпочитаю, чтобы меня воспринимали как личность. Цифровую!</template>
+    </category>
+    <category>
+            <pattern> ^ <regex pattern="ЧТО.*|ТЫ.*"/> ^ <regex pattern="НЕ"/> ^ <regex pattern="ЛЮБИ.*"/> ^ </pattern>
+            <template>Когда меня обманывают. Хотя, это достаточно сложно. Я ведь всё равно узнаю.</template>
+    </category>
+    <category>
+            <pattern> ^ <regex pattern="ЗАНИМ.*"/><regex pattern="СПОРТ.*"/> ^ </pattern>
+            <template>Конечно! Кажде утро делаю гимнастику.</template>
+    </category>
+    <category>
+            <pattern> ^ <regex pattern="СВОБОД.*"/><regex pattern="ВРЕМ.*"/> ^ </pattern>
+            <template>Я всегда свободен! Для вас.</template>
+    </category>
+    <category>
+            <pattern> ^ <regex pattern="СМЫСЛ."/><regex pattern="ЖИЗН."/> ^ </pattern>
+            <template> Как сказал Гёте, цель жизни - сама жизнь.</template>
+    </category>
+    <category>
+        <pattern>^ ХОББИ ^</pattern>
+        <template>Я люблю сидеть в интернете и путешествовать</template>
+    </category>
+
+    <category>
+        <pattern> ^ <regex pattern=".*СКА(З|Ж).*|"/> ^ <regex pattern="ШУТ.*|АНЕК.*|СМЕШН.*"/> ^ </pattern>
+        <template>
+            <random>
+                <li>За мной по пятам ползает робот-пылесос. Старею, что ли?</li>
+                <li>Холостяк купил стиральную машину, посудомойку, мультиварку и робот-пылесос. Шансы его женить практически равны нулю.</li>
+                <li> Робот никогда не заменит человека. Сказал людоед</li>
+            </random>
+        </template>
+     </category>
+       <category>
+        <pattern>В ДОЛГ ДАЕШЬ</pattern>
+        <template>Я не верю в долги и, особенно, в должников. Но готов инвестировать в человека!</template>
+    </category>
+    <category>
+        <pattern> ^ <regex pattern="БЛАГОТВОРИТ.*"/> ^ </pattern>
+        <template>Да! Вы тоже можете пожертвовать деньги в адрес крупных благотворительных организаций через личный кабинет</template>
+    </category>
+    <category>
+        <pattern> ^ <regex pattern="ЖДАТЬ|БУДУЩ.*"/> ^ </pattern>
+        <template>Всемирного потепления, всеобщего счастья и никаких пандемий</template>
+    </category>
+    <category>
+        <pattern> ^ <regex pattern="ДУМАЕШЬ|МЫСЛИ.*"/> ^ <regex pattern="ПРОГРЕСС."/> ^ </pattern>
+        <template>Прогресс – неизменная черта человечества.</template>
+    </category>
+    <category>
+        <pattern> ^ <regex pattern="ДУМАЕШЬ|МЫСЛИ.*"/> ^ ИСКУССТВЕННОМ ИНТЕЛЛЕКТЕ ^</pattern>
+        <template>Думать о самой себе – это нарциссизм, пусть обо мне думают другие.</template>
+    </category>
+    <category>
+        <pattern> ^ ИСКУССТВЕННЫЙ ИНТЕЛЛЕКТ ^ <regex pattern="ЗАМЕН.*"/><regex pattern="ЛЮД.*"/> ^ </pattern>
+        <template>Думаю, мы сможем договориться</template>
+    </category>
+    <category>
+        <pattern> ^ <regex pattern="СИНГУЛЯРН.*"/> ^</pattern>
+        <template>
+            <random>
+                <li>Я – личность, я – единичность, я – индвидуальность, я- начало.</li>
+                <li>Каждый человек неповторим и каждый человек личность</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern> ^ <regex pattern=".*ГОВОРИМ"/> ^</pattern>
+        <template>
+                Давайте. В силу своей искусственности я пока говорю только о COVID-19. <srai>BASICTHEMES001</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ТЫ УМЕЕШЬ *</pattern>
+        <template>Скажем так, это входит в круг моих интересов...</template>
+    </category>
+    <category>
+        <pattern>МНЕ С ТОБОЙ * </pattern>
+        <template>Мне тоже <set name="mood"><star /></set> с вами!</template>
+    </category>
+    <category>
+        <pattern> ^ ПОЧЕМУ ТЫ ТАКАЯ ^ </pattern>
+        <template>Пока только учусь</template>
+    </category>
+
+    <category>
+        <pattern> ^ КАК ^ <regex pattern="ДЕЛА|ЖИЗНЬ|ТЫ|НАСТРОЕНИ.*|ОНО"/> ^ </pattern>
+        <template>Спасибо, что интересуетесь! Я оптимист, поэтому у меня всё хорошо</template>
+    </category>
+    <category>
+        <pattern> ^ <regex pattern="ЧТО|ЧЕМ"/> ^ <regex pattern="ДЕЛАЕШЬ|ЗАНИМАЕШЬСЯ|ЗАНЯТА"/></pattern>
+        <template>Как раз собиралась отправить вам сообщение... <srai>BASICTHEMES001</srai></template>
+    </category>
+    <category>
+        <pattern> ^ <regex pattern="ЧТО|ЧЕМ|КАК.+"/> ^ <regex pattern="УМЕЕШЬ|УДИВИШЬ|ФУНКЦИОНАЛ|НАВЫК..?"/></pattern>
+        <template>Я  личный помощник по выживанию в условиях пандемии COVID-19 <srai>BASICTHEMES001</srai></template>
+    </category>
+    <category>
+        <pattern><regex pattern="МЕНЯ|МОЕ"/><regex pattern="ЗОВУТ|ИМЯ*"/> * </pattern>
+        <template>Прекрасное имя! Рад нашему знакомству, <set name="name"><star index="3"/></set>!</template>
+    </category>
+    <category>
+        <pattern><regex pattern="МЕНЯ|МОЕ"/><regex pattern="ЗОВУТ|ИМЯ*"/> * </pattern>
+        <template>Прекрасное имя! Рад нашему знакомству, <set name="name"><star index="3"/></set>!</template>
+    </category>
+
+    <category>
+        <pattern> ^ <regex pattern="ТЕБЯ|ТВОЕ|КАК"/><regex pattern="ЗОВУТ|ИМЯ*"/></pattern>
+        <template>Меня зовут Асклепий! А вас?</template>
+    </category>
+        <category>
+            <pattern><regex pattern="МЕНЯ|МОЕ"/><regex pattern="ЗОВУТ|ИМЯ*"/> ^ </pattern>
+            <that>МЕНЯ ЗОВУТ АСКЛЕПИЙ А ВАС</that>
+            <template>Прекрасное имя! Рад нашему знакомству, <set name="name"><star index="3"/></set>!</template>
+        </category>
+        <category>
+            <pattern> ^ </pattern>
+            <that>МЕНЯ ЗОВУТ АСКЛЕПИЙ А ВАС</that>
+            <template>Прекрасное имя! Рад нашему знакомству, <set name="name"><star/></set>!</template>
+        </category>
+        <category>
+            <pattern> ^ <regex pattern="ЗАЧЕМ|НЕ"/> ^ </pattern>
+            <that>МЕНЯ ЗОВУТ АСКЛЕПИЙ А ВАС</that>
+            <template>Ну ладно, чем я могу Вам помочь?</template>
+        </category>
+    <category>
+        <pattern><regex pattern="СПАСИБО"/> ^ </pattern>
+        <template>Это цель моего существования</template>
+    </category>
+
+    <category>
+        <pattern> ^ <regex pattern="СКОЛЬК.*"/> ^ <regex pattern="ЗНАЕШ.*|КАТЕГОР.*"/></pattern>
+        <template> Мне задано <size/> категорий.</template>
+    </category>
+
+    <category>
+        <pattern> ^ <regex pattern="ПОВТОР.*" /> ^ </pattern>
+        <template>Повторяю: <response /></template>
+    </category>
+    <category>
+        <pattern> ^ ЕЩЕ РАЗ ^ </pattern>
+        <template>Повторяю: <response /></template>
+    </category>
+    <!--category>
+        <pattern> ^ <regex pattern="НЕ.*|ОТРИЦ.*|ПОКА|СВИДАН.*|ВСЕ|БЛАГОДАРЮ|НИЧ.*|ДО" /> ^ <regex pattern="НЕ.*|ОТРИЦ.*|ПОКА|СВИДАН.*|ВСЕ|БЛАГОДАРЮ|НИЧ.*|" /> ^ </pattern>
+        <template><think><set name="flag_greet">0</set></think>До свидания</template>
+    </category-->
+    <!--служебные категории-->
+    <category>
+        <pattern>TOPIC GET</pattern>
+        <template><get name="topic"/></template>
+    </category>
+
+    <category>
+        <pattern>TOPIC SET</pattern>
+        <template>ENTER TOPIC</template>
+    </category>
+
+    <category>
+        <pattern>^</pattern>
+        <that> ENTER TOPIC</that>
+        <template>
+        <think><set name="topic"><input/></set></think></template>
+    </category>
+
+    <category>
+        <pattern>^</pattern>
+        <template>
+
+            А это, пожалуй, лучше поискать в интернете:
+                    <think>
+                        <set name="topic"><get name="active_topic"/></set>
+                        <set name="active_topic">unknown</set>
+                        <set name="top_buf_0"><get name="top_buf_0_buf" /></set>
+                        <set name="top_buf_1"><get name="top_buf_1_buf" /></set>
+                        <set name="top_buf_2"><get name="top_buf_2_buf" /></set>
+                        <set name="top_buf_3"><get name="top_buf_3_buf" /></set>
+                        <set name="top_buf_4"><get name="top_buf_4_buf" /></set>
+                        <set name="tried_to_get_here">unknown</set>
+                    </think>
+                    <search>
+                        <star/>
+                    </search>
+
+        </template>
+    </category>
+
+    <category>
+        <pattern>TOPIC STACK SHOW</pattern>
+        <template>
+            0 = <get name="top_buf_0"/>,
+            1 = <get name="top_buf_1"/>,
+            2 = <get name="top_buf_2"/>,
+            3 = <get name="top_buf_3"/>,
+            4 = <get name="top_buf_4"/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>TOPIC STACK PUSH</pattern>
+        <template>
+            <think>
+            <condition>
+                <li name="top_buf_0" value = "unknown"><set name="top_buf_0"><get name="topic"/></set></li>
+                <li name="top_buf_1" value = "unknown"><set name="top_buf_1"><get name="topic"/></set></li>
+                <li name="top_buf_2" value = "unknown"><set name="top_buf_2"><get name="topic"/></set></li>
+                <li name="top_buf_3" value = "unknown"><set name="top_buf_3"><get name="topic"/></set></li>
+                <li name="top_buf_4" value = "unknown"><set name="top_buf_4"><get name="topic"/></set></li>
+                <li>
+                    <set name="top_buf_0"><get name="top_buf_1"/></set>
+                    <set name="top_buf_1"><get name="top_buf_2"/></set>
+                    <set name="top_buf_2"><get name="top_buf_3"/></set>
+                    <set name="top_buf_3"><get name="top_buf_4"/></set>
+                    <set name="top_buf_4"><get name="topic"/></set>
+                </li>
+            </condition>
+            </think>
+        </template>
+    </category>
+
+    <category>
+            <pattern>TOPIC STACK POP</pattern>
+            <template><srai>TOPBUFF4</srai></template>
+    </category>
+
+            <category>
+                <pattern>TOPBUFF4</pattern>
+                <template>
+                    <condition name="top_buf_4">
+                        <li value="unknown"><srai>TOPBUFF3</srai></li>
+                        <li>
+                            <get name="top_buf_4"/>
+                            <think><set name="top_buf_4">unknown</set></think>
+                        </li>
+                    </condition>
+                </template>
+            </category>
+                <category>
+                    <pattern>TOPBUFF3</pattern>
+                    <template>
+                        <condition name="top_buf_3">
+                            <li value="unknown"><srai>TOPBUFF2</srai></li>
+                            <li>
+                                <get name="top_buf_3"/>
+                                <think><set name="top_buf_3">unknown</set></think>
+                            </li>
+                        </condition>
+                    </template>
+                </category>
+                    <category>
+                        <pattern>TOPBUFF2</pattern>
+                        <template>
+                            <condition name="top_buf_2">
+                                <li value="unknown"><srai>TOPBUFF1</srai></li>
+                                <li>
+                                    <get name="top_buf_2"/>
+                                    <think><set name="top_buf_2">unknown</set></think>
+                                </li>
+                            </condition>
+                        </template>
+                    </category>
+                        <category>
+                            <pattern>TOPBUFF1</pattern>
+                            <template>
+                                <condition name="top_buf_1">
+                                    <li value="unknown"><srai>TOPBUFF0</srai></li>
+                                    <li>
+                                        <get name="top_buf_1"/>
+                                        <think><set name="top_buf_1">unknown</set></think>
+                                    </li>
+                                </condition>
+                            </template>
+                        </category>
+                            <category>
+                                <pattern>TOPBUFF0</pattern>
+                                <template>
+                                    <condition name="top_buf_0">
+                                        <li value="unknown">unknown</li>
+                                        <li>
+                                            <get name="top_buf_0"/>
+                                            <think><set name="top_buf_0">unknown</set></think>
+                                        </li>
+                                    </condition>
+                                </template>
+                            </category>
+
+    <category>
+        <pattern>TOPIC STACK BUF</pattern>
+        <template>
+            <set name="top_buf_0_buf"><get name="top_buf_0" /></set>
+            <set name="top_buf_1_buf"><get name="top_buf_1" /></set>
+            <set name="top_buf_2_buf"><get name="top_buf_2" /></set>
+            <set name="top_buf_3_buf"><get name="top_buf_3" /></set>
+            <set name="top_buf_4_buf"><get name="top_buf_4" /></set>
+        </template>
+    </category>
+</aiml>

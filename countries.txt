@@ -1,0 +1,224 @@
+Абхазия	Abkhazia
+Австралия	Australia
+Австрия	Austria
+Азербайджан	Azerbaijan
+Аландские острова	Aland Islands
+Албания	Albania
+Алжир	Algeria
+Ангилья	Anguilla
+Ангола	Angola
+Андорра	Andorra
+Антигуа и Барбуда	Antigua and Barbuda
+Аргентина	Argentina
+Армения	Armenia
+Аруба	Aruba
+Афганистан	Afghanistan
+Багамские острова	Bahamas
+Бангладеш	Bangladesh
+Барбадос	Barbados
+Бахрейн	Bahrain
+Беларусь	Belarus
+Белиз	Belize
+Бельгия	Belgium
+Бенин	Benin
+Болгария	Bulgaria
+Боливия	Bolivia
+Босния и Герцеговина	Bosnia and Herzegovina
+Ботсвана	Botswana
+Бразилия	Brazil
+Бруней	Brunei
+Буркина-Фасо	Burkina Faso
+Бурунди	Burundi
+Бутан	Bhutan
+Ватикан	Vatican City
+Великобритания	United Kingdom
+Венгрия	Hungary
+Венесуэла	Venezuela
+Восточный Тимор	Timor, East
+Вьетнам	Vietnam
+Габон	Gabon
+Гаити	Haiti
+Гамбия	Gambia
+Гана	Ghana
+Гайана	Guyana
+Гваделупа	Guadeloupe
+Гватемала	Guatemala
+Гвинея	Guinea
+Гвинея-Бисау	Guinea-Bissau
+Германия	Germany
+Гибралтар	Gibraltar
+Гонконг	Hong Kong
+Гондурас	Honduras
+Гренада	Grenada
+Гренландия	Greenland
+Греция	Greece
+Грузия	Georgia
+Гуам	Guam
+Дания	Denmark
+Джерси	Jersey
+Доминика	Dominica
+Доминиканская Республика	Dominican Republic
+Египет	Egypt
+Замбия	Zambia
+Западная Сахара	Western Sahara
+Зимбабве	Zimbabwe
+Израиль	Israel
+Индия	India
+Индонезия	Indonesia
+Иордания	Jordan
+Ирак	Iraq
+Иран	Iran
+Ирландия	Ireland
+Исландия	Iceland
+Испания	Spain
+Италия	Italy
+Йемен	Yemen
+Казахстан	Kazakhstan
+Кайманы	Cayman Islands
+Камбоджа	Cambodia
+Камерун	Cameroon
+Канада	Canada
+Катар	Qatar
+Кения	Kenya
+Кипр	Cyprus
+Киргизия	Kyrgyzstan
+Кирибати	Kiribati
+Китай	China
+Колумбия	Colombia
+Конго	Congo (Kinshasa)
+Корея Северная	Korea, D.P.R.
+Корея Южная	Korea, South
+Коста-Рика	Costa Rica
+Кот-д'Ивуар	Cote d'Ivoire
+Куба	Cuba
+Кувейт	Kuwait
+Кюрасао	Curacao
+Лаос	Lao P.D.R.
+Латвия	Latvia
+Лесото	Lesotho
+Либерия	Liberia
+Ливан	Lebanon
+Ливия	Libyan Arab Jamahiriya
+Литва	Lithuania
+Лихтенштейн	Liechtenstein
+Люксембург	Luxembourg
+Маврикий	Mauritius
+Мавритания	Mauritania
+Мадагаскар	Madagascar
+Макао	Macao SAR
+Македония	Macedonia
+Малави	Malawi
+Малайзия	Malaysia
+Мали	Mali
+Мальдивы	Maldives
+Мальта	Malta
+Марокко	Morocco
+Мартиника	Martinique
+Мексика	Mexico
+Мозамбик	Mozambique
+Молдавия	Moldova
+Монако	Monaco
+Монголия	Mongolia
+Намибия	Namibia
+Непал	Nepal
+Нигер	Niger
+Нигерия	Nigeria
+Нидерланды	Netherlands
+Никарагуа	Nicaragua
+Новая Зеландия	New Zealand
+Норвегия	Norway
+Нормандские острова	Channel Islands
+ОАЭ	United Arab Emirates
+Оман	Oman
+Пакистан	Pakistan
+Палестинские территории	West Bank and Gaza
+Панама	Panama
+Парагвай	Paraguay
+Перу	Peru
+Польша	Poland
+Португалия	Portugal
+Россия	Russia
+Реюньон	Reunion
+Румыния	Romania
+Сан-Марино	San Marino
+Саудовская Аравия	Saudi Arabia
+Свазиленд	Eswatini
+Святой престол	Holy See
+Северная Македония	North Macedonia
+Сейшелы	Seychelles
+Сен-Бартелеми	Saint Barthelemy
+Сен-Мартен	Saint Martin
+Сенегал	Senegal
+Сербия	Serbia
+Сингапур	Singapore
+Сирийская арабская республика	Syrian Arab Republic
+Словакия	Slovakia
+Словения	Slovenia
+Сомали	Somalia
+Судан	Sudan
+США	US
+Таджикистан	Tajikistan
+Таиланд	Thailand
+Тайбэй	Taipei and environs
+Тайвань	Taiwan*
+Танзания	Tanzania
+Того	Togo
+Тринидад и Тобаго	Trinidad and Tobago
+Тунис	Tunisia
+Туркменистан	Turkmenistan
+Турция	Turkey
+Уганда	Uganda
+Узбекистан	Uzbekistan
+Украина	Ukraine
+Уругвай	Uruguay
+Фарерские острова	Faroe Islands
+Федеративные Штаты Микронезии	Micronesia
+Фиджи	Fiji
+Филиппины	Philippines
+Финляндия	Finland
+Франция	France
+Французская Гвиана	French Guiana
+Хорватия	Croatia
+Чад	Chad
+Черногория	Montenegro
+Чехия	Czechia
+Чили	Chile
+Швейцария	Switzerland
+Швеция	Sweden
+Шри-Ланка	Sri Lanka
+Эквадор	Ecuador
+Эритрея	Eritrea
+Эстония	Estonia
+Эфиопия	Ethiopia
+ЮАР	South Africa
+Ямайка	Jamaica
+Япония	Japan
+Другие	Others
+Гернси	Guernsey
+Руанда	Rwanda
+Сент-Люсия	Saint Lucia
+Сент-Винсент и Гренадины	Saint Vincent and the Grenadines
+Суринам	Suriname
+Косово	Kosovo
+ЦАР	Central African Republic
+Браззавиль	Congo (Brazzaville)
+Экваториальная Гвинея	Equatorial Guinea
+Пуэрто-Рико	Puerto Rico
+Майотта	Mayotte
+Джибути	Djibouti
+Сальвадор	El Salvador
+Кабо-Верде	Cabo Verde
+Папуа-Новая Гвинея	Papua New Guinea
+Восточный Тимор	Timor-Leste
+Сирия	Syria
+Лаос	Laos
+Ливия	Libya
+Diamond Princess	Diamond Princess
+Сент-Китс и Невис	Saint Kitts and Nevis
+Сьерра-Леоне	Sierra Leone
+Мьянма	Burma
+Южный Судан	South Sudan
+Сан-Томе и Принсипи	Sao Tome and Principe
+MS Zaandam	MS Zaandam
+Коморы	Comoros
+Cruise Ship	Cruise Ship
